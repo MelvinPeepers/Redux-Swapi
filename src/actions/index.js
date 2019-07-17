@@ -21,9 +21,12 @@ export function getCharacters() {
     axios
       .get("https://swapi.co/api/people/")
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
+        dispatch({ type: GET_SUCCESS, payload: response.data });
       })
-      .catch(error => {});
+      .catch(error => {
+        dispatch({ type: GET_FAILED, payload: error.response.data });
+      });
   };
 }
 // the url to fetch characters from is `https://swapi.co/api/people/`
