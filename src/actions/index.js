@@ -13,21 +13,21 @@ export const GET_FAILED = "GET_FAILED";
 
 // our action creator will be a function that returns a function
 export function getCharacters() {
-  // can return a functioin because we're using redux-thunk
+  // can return a function because we're using redux-thunk
   return dispatch => {
     // receives direct access to the dispatcher
+    // enter the "loading" state
     dispatch({ type: GET_FETCHING_START });
 
     axios
       .get("https://swapi.co/api/people/")
       .then(response => {
-        // console.log(response.data);
-        dispatch({ type: GET_SUCCESS, payload: response.data });
+        dispatch({ type: GET_SUCCESS, payload: response });
       })
       .catch(error => {
-        dispatch({ type: GET_FAILED, payload: error.response.data });
+        dispatch({ type: GET_FAILED, payload: error.response });
       });
   };
 }
 // the url to fetch characters from is `https://swapi.co/api/people/`
-// remember that now we have controll over our thunk-based action creator
+// remember that now we have control over our thunk-based action creator
